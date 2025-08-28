@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZALLHOSTINGER - Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #e63946;
+            --dark: #1d3557;
+            --light: #f1faee;
+            --black: #0d1b2a;
+            --white: #ffffff;
+            --gray: #8d99ae;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        header.sticky {
+            background-color: var(--black);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .nav-menu {
+            display: flex;
+        }
+        
+        .nav-item {
+            margin: 0 15px;
+        }
+        
+        .nav-link {
+            color: var(--white);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.5s;
+        }
+        
+        .hero-cta {
+            opacity: 0;
+            animation: fadeIn 1s forwards 1s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .about-img.in-view {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .about-text.in-view {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .project-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .project-desc {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        /* Education Section */
+        .education {
+            background-color: var(--light);
+        }
+        
+        .education-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .edu-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .edu-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .edu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .edu-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .edu-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .edu-desc {
+            color: var(--gray);
+        }
+        
+        /* Entertainment Section */
+        .entertainment-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .ent-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .ent-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .ent-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ent-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .ent-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .ent-desc {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--light);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 1s forwards;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .testimonial-rating {
+            color: gold;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--gray);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        
+        .contact-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .contact-details p {
+            color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                gap: 0;
+                flex-direction: column;
+                background-color: var(--black);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .about-img, .about-text {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <div class="logo-img">Z</div>
+                    ZALLHOSTINGER
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">Tentang Saya</a></li>
+                    <li class="nav-item"><a href="#projects" class="nav-link">Proyek</a></li>
+                    <li class="nav-item"><a href="#education" class="nav-link">Edukasi</a></li>
+                    <li class="nav-item"><a href="#business" class="nav-link">Bisnis</a></li>
+                    <li class="nav-item"><a href="#entertainment" class="nav-link">Hiburan</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" id="typed-title">Halo, saya Zallsulbar. Selamat datang di ZALLHOSTINGER.</h1>
+                <p class="hero-subtitle">Belajar, Berkarya, dan Berbagi untuk Semua.</p>
+                <a href="#about" class="btn hero-cta">Jelajahi Website</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1603415526960-f8f0f8a2d2d6" alt="Zallsulbar">
+                </div>
+                <div class="about-text">
+                    <h3>Zallsulbar / ZALLHOSTINGER</h3>
+                    <p>Seorang profesional di bidang teknologi dengan passion dalam edukasi, bisnis, dan hiburan. Saya percaya bahwa belajar adalah proses seumur hidup dan berbagi pengetahuan adalah kunci untuk tumbuh bersama.</p>
+                    <p>Dengan latar belakang di bidang IT dan bisnis, saya telah mengembangkan berbagai proyek yang bertujuan untuk membantu orang lain belajar dan berkembang. Mulai dari tutorial coding hingga tips bisnis, saya berusaha membuat konten yang mudah dipahami dan aplikatif.</p>
+                    <p>Di waktu luang, saya menikmati fotografi, menjelajahi teknologi terbaru, dan terlibat dalam kegiatan sosial. Tujuan saya adalah menciptakan dampak positif melalui edukasi dan kolaborasi.</p>
+                    <a href="#contact" class="btn">Hubungi Saya</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Proyek & Bisnis</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0" alt="ZALLSTORE REAL">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">ZALLSTORE REAL</h3>
+                        <p class="project-desc">Toko fashion online dengan koleksi terkini dan gaya urban.</p>
+                        <a href="#" class="btn">Kunjungi</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" alt="ZALLKALTIM">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">ZALLKALTIM</h3>
+                        <p class="project-desc">Platform untuk mempromosikan budaya dan pariwisata Kalimantan Timur.</p>
+                        <a href="#" class="btn">Kunjungi</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c" alt="AutoServ Pro">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">AutoServ Pro</h3>
+                        <p class="project-desc">Layanan profesional untuk perawatan dan perbaikan kendaraan.</p>
+                        <a href="#" class="btn">Kunjungi</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" alt="PctShoot">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">PctShoot</h3>
+                        <p class="project-desc">Jasa fotografi profesional untuk berbagai acara dan kebutuhan.</p>
+                        <a href="#" class="btn">Kunjungi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section education">
+        <div class="container">
+            <h2 class="section-title">Edukasi & Tutorial</h2>
+            <div class="education-cards">
+                <div class="edu-card">
+                    <div class="edu-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="edu-title">Tutorial Coding</h3>
+                    <p class="edu-desc">Belajar pemrograman dari dasar hingga mahir dengan panduan step-by-step.</p>
+                    <a href="#" class="btn">Pelajari</a>
+                </div>
+                <div class="edu-card">
+                    <div class="edu-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="edu-title">Tips Bisnis</h3>
+                    <p class="edu-desc">Strategi dan wawasan untuk mengembangkan bisnis di era digital.</p>
+                    <a href="#" class="btn">Pelajari</a>
+                </div>
+                <div class="edu-card">
+                    <div class="edu-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="edu-title">Teknologi Terkini</h3>
+                    <p class="edu-desc">Update terbaru tentang perkembangan teknologi dan tren digital.</p>
+                    <a href="#" class="btn">Pelajari</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Section -->
+    <section id="business" class="section">
+        <div class="container">
+            <h2 class="section-title">Bisnis & Kolaborasi</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Peluang Kolaborasi</h3>
+                    <p>Saya terbuka untuk berbagai peluang kolaborasi dalam bidang teknologi, edukasi, dan bisnis. Dengan pengalaman di berbagai industri, saya siap membantu mewujudkan ide-ide kreatif menjadi kenyataan.</p>
+                    <p>Layanan yang ditawarkan meliputi konsultasi IT, pengembangan web, strategi digital marketing, dan pembuatan konten edukasi.</p>
+                    <p>Jika Anda memiliki proyek yang ingin dikembangkan bersama, jangan ragu untuk menghubungi saya.</p>
+                    <a href="#contact" class="btn">Diskusi Proyek</a>
+                </div>
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" alt="Kolaborasi Bisnis">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entertainment Section -->
+    <section id="entertainment" class="section">
+        <div class="container">
+            <h2 class="section-title">Hiburan & Sosial</h2>
+            <div class="entertainment-cards">
+                <div class="ent-card">
+                    <div class="ent-icon">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <h3 class="ent-title">Tebak Burung</h3>
+                    <p class="ent-desc">Permainan tebak-tebakan jenis burung dengan gambar dan fakta menarik.</p>
+                    <a href="#" class="btn">Main Sekarang</a>
+                </div>
+                <div class="ent-card">
+                    <div class="ent-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="ent-title">Kuis Agama</h3>
+                    <p class="ent-desc">Uji pengetahuan agama Islam dengan kuis interaktif dan edukatif.</p>
+                    <a href="#" class="btn">Main Sekarang</a>
+                </div>
+                <div class="ent-card">
+                    <div class="ent-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="ent-title">Voting Skin Game</h3>
+                    <p class="ent-desc">Berikan suara untuk skin game terbaik dan lihat hasil voting pemain lain.</p>
+                    <a href="#" class="btn">Vote Sekarang</a>
+                </div>
+                <div class="ent-card">
+                    <div class="ent-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="ent-title">Komunitas</h3>
+                    <p class="ent-desc">Bergabung dengan komunitas untuk berdiskusi dan berbagi pengalaman.</p>
+                    <a href="#" class="btn">Gabung Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">Testimoni & Rating</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"ZALLHOSTINGER memberikan konten edukasi yang sangat bermanfaat. Tutorial coding-nya mudah diikuti bahkan untuk pemula seperti saya."</p>
+                    <p class="testimonial-author">- Ahmad, Web Developer</p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Kolaborasi bisnis dengan ZALLHOSTINGER sangat menyenangkan. Profesional dan hasilnya beyond expectation!"</p>
+                    <p class="testimonial-author">- Sinta, PEMILIK BRAND FASHION</p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"Konten hiburan yang dibuat sangat kreatif dan engaging. Anak-anak saya sangat suka dengan permainan tebak burungnya."</p>
+                    <p class="testimonial-author">- Rina, IBU RUMAH TANGGA</p>
+                </div>
+                <div class="testimonial-nav">
+                    <div class="testimonial-dot active" data-index="0"></div>
+                    <div class="testimonial-dot" data-index="1"></div>
+                    <div class="testimonial-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Kontak</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Lokasi</h4>
+                            <p>Kalimantan Timur, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>info@zallhostinger.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telepon</h4>
+                            <p>+62 812 3456 7890</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Nama Lengkap" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholderAlamat Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-input" placeholder="Pesan Anda" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>ZALLHOSTINGER</h4>
+                    <p>Platform personal untuk berbagi pengetahuan, pengalaman, dan peluang kolaborasi dalam bidang teknologi, edukasi, dan bisnis.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Menu</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">Tentang Saya</a></li>
+                        <li><a href="#projects">Proyek</a></li>
+                        <li><a href#education">Edukasi</a></li>
+                        <li><a href="#business">Bisnis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Konsultasi IT</a></li>
+                        <li><a href="#">Pengembangan Web</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                        <li><a href="#">Konten Edukasi</a></li>
+                        <li><a href="#">Kolaborasi Bisnis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@zallhostinger.com">info@zallhostinger.com</a></li>
+                        <li><a href="tel:+6281234567890">+62 812 3456 7890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ZALLHOSTINGER – Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+
+        // Scroll Animation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.about-img, .about-text, .project-card, .edu-card, .ent-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Testimonial Slider
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+        const testimonials = document.querySelectorAll('.testimonial');
+
+        testimonialDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                
+                // Remove active class from all testimonials and dots
+                testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+                testimonialDots.forEach(dot => dot.classList.remove('active'));
+                
+                // Add active class to current testimonial and dot
+                testimonials[index].classList.add('active');
+                this.classList.add('active');
+            });
+        });
+
+        // Auto rotate testimonials
+        let currentTestimonial = 0;
+        function rotateTestimonials() {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            testimonialDots.forEach(dot => dot.classList.remove('active'));
+            
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            
+            testimonials[currentTestimonial].classList.add('active');
+            testimonialDots[currentTestimonial].classList.add('active');
+        }
+
+        setInterval(rotateTestimonials, 5000);
+
+        // Typing Animation
+        const typedTitle = document.getElementById('typed-title');
+        const text = "Halo, saya Zallsulbar. Selamat datang di ZALLHOSTINGER.";
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                typedTitle.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Start typing animation when page loads
+        window.addEventListener('load', function() {
+            typedTitle.innerHTML = '';
+            typeWriter();
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Pesan Anda telah berhasil dikirim. Saya akan membalasnya segera.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
